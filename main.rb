@@ -25,7 +25,7 @@ end
 
 class Game
 
-  # to add logic for the game
+
   def getLives (player1 , player2)
 
     if player1.lives > 0 && player2.lives > 0
@@ -38,6 +38,7 @@ class Game
   end
 
   def newGame(player, q)
+    puts "----- NEW TURN -----"
     puts "#{player.name}: #{q.question}"
     input = gets.chomp.to_i
     if  input == q.answer
@@ -59,7 +60,21 @@ class Game
 
 end
 
+p1 = Player.new("Player 1")
+p2 = Player.new("Player 2")
+game = Game.new()
+current_player = p2
 
+while p1.lives > 0 && p2.lives > 0
+  current_player = game.changePlayer(current_player, p1, p2)
+  q = Question.new()
+  game.newGame(current_player, q)
+  game.getLives(p1, p2)
+
+end
+
+puts " ====== Game Over ======"
+puts "Good bye !"
 
 
 
